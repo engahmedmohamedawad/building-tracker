@@ -1,0 +1,21 @@
+<div class="app-container">
+  <nav class="navigation">
+    <button 
+      class="nav-btn"
+      [class.active]="currentView === 'check-in'"
+      (click)="switchView('check-in')"
+    >
+      ✓ Check In/Out
+    </button>
+    <button 
+      class="nav-btn"
+      [class.active]="currentView === 'records'"
+      (click)="switchView('records')"
+    >
+      📊 View Records
+    </button>
+  </nav>
+
+  <app-check-in *ngIf="currentView === 'check-in'"></app-check-in>
+  <app-records *ngIf="currentView === 'records'"></app-records>
+</div>

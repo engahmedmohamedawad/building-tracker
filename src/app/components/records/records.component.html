@@ -1,0 +1,54 @@
+<div class="records-container">
+  <div class="header">
+    <h1>📋 Attendance Records</h1>
+    <p class="subtitle">Building Access Logs</p>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>All Records</h2>
+      <button class="clear-btn" (click)="clearAllRecords()" *ngIf="records.length > 0">
+        🗑️ Clear All
+      </button>
+    </div>
+
+    <div class="table-container" *ngIf="records.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Officer Name</th>
+            <th>Date</th>
+            <th>Building Entry</th>
+            <th>Building Exit</th>
+            <th>Mission Exit</th>
+            <th>Mission Return</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of records" class="record-row">
+            <td class="officer-name">{{ record.officerName }}</td>
+            <td class="date">{{ formatDate(record.date) }}</td>
+            <td [class.has-value]="record.buildingEntry">
+              <span class="time-badge entry">{{ formatTime(record.buildingEntry) }}</span>
+            </td>
+            <td [class.has-value]="record.buildingExit">
+              <span class="time-badge exit">{{ formatTime(record.buildingExit) }}</span>
+            </td>
+            <td [class.has-value]="record.missionExit">
+              <span class="time-badge mission-out">{{ formatTime(record.missionExit) }}</span>
+            </td>
+            <td [class.has-value]="record.missionReturn">
+              <span class="time-badge mission-back">{{ formatTime(record.missionReturn) }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="empty-state" *ngIf="records.length === 0">
+      <div class="empty-icon">📭</div>
+      <h3>No records yet</h3>
+      <p>Start recording officer check-ins to see them here</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="check-in-container">
+  <div class="header">
+    <h1>🏢 Building Access Control</h1>
+    <p class="subtitle">Guard Check-in System</p>
+  </div>
+
+  <div class="card">
+    <div class="form-section">
+      <label for="officerName">Officer Name</label>
+      <input 
+        id="officerName"
+        type="text" 
+        [(ngModel)]="officerName" 
+        placeholder="Enter officer name"
+        class="officer-input"
+        (keyup.enter)="submitAction()"
+      />
+    </div>
+
+    <div class="actions-section">
+      <h3>Select Action</h3>
+      <div class="action-grid">
+        <div 
+          *ngFor="let action of actions"
+          class="action-card"
+          [class.selected]="selectedAction === action.type"
+          [style.border-color]="selectedAction === action.type ? action.color : '#e0e0e0'"
+          (click)="selectAction(action.type)"
+        >
+          <div class="action-icon" [style.background]="action.color">{{ action.icon }}</div>
+          <div class="action-label">{{ action.label }}</div>
+        </div>
+      </div>
+    </div>
+
+    <button 
+      class="submit-btn"
+      [disabled]="!officerName || !selectedAction"
+      (click)="submitAction()"
+    >
+      Record Action
+    </button>
+
+    <div class="success-message" *ngIf="showSuccess">
+      ✓ Action recorded successfully!
+    </div>
+  </div>
+</div>
